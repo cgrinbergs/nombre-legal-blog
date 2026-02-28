@@ -1,72 +1,1162 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import PostCard from '../components/PostCard.astro';
-import CTA from '../components/CTA.astro';
-import { client, postsQuery } from '../lib/sanity';
-
-let posts: any[] = [];
-try {
-  if (import.meta.env.PUBLIC_SANITY_PROJECT_ID) {
-    posts = await client.fetch(postsQuery);
-  }
-} catch { /* no-op during build without credentials */ }
-const [featured, ...rest] = posts;
+// Landing page principal - Nombre Legal
 ---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nombre Legal - Cambio de Nombre en Chile</title>
+    <meta name="description" content="Gestión legal completa para tu cambio de nombre y apellidos en Chile. Te acompañamos en todo el proceso judicial ante tribunales, respaldado por la Ley 17.344.">
+    <link rel="canonical" href="https://nombrelegal.cl" />
 
-<BaseLayout
-  title="Blog — Cambio de Nombre en Chile"
-  description="Guías, costos y todo lo que necesitas saber para cambiar de nombre o apellido en Chile. Información legal clara y actualizada."
-  ogType="website"
->
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Nombre Legal - Cambio de Nombre en Chile" />
+    <meta property="og:description" content="Gestión legal completa para tu cambio de nombre y apellidos en Chile. Te acompañamos en todo el proceso ante tribunales, respaldado por la Ley 17.344." />
+    <meta property="og:image" content="https://nombrelegal.cl/og-default.jpg" />
+    <meta property="og:url" content="https://nombrelegal.cl" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nombre Legal" />
+    <meta property="og:locale" content="es_CL" />
 
-    <!-- Hero del blog -->
-    <div class="text-center mb-12">
-      <h1 class="text-3xl sm:text-4xl font-bold text-[#1A1A1A] mb-4">
-        Blog sobre cambio de nombre en Chile
-      </h1>
-      <p class="text-lg text-[#4A4A4A] max-w-2xl mx-auto">
-        Guías prácticas, costos actualizados y respuestas a las preguntas más frecuentes
-        sobre el proceso legal de cambio de nombre y apellidos.
-      </p>
-    </div>
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Nombre Legal - Cambio de Nombre en Chile" />
+    <meta name="twitter:description" content="Gestión legal completa para tu cambio de nombre y apellidos en Chile. Proceso judicial ante tribunales." />
+    <meta name="twitter:image" content="https://nombrelegal.cl/og-default.jpg" />
 
-    {posts.length === 0 ? (
-      <!-- Estado vacío -->
-      <div class="text-center py-20 text-[#8A8A8A]">
-        <p class="text-lg mb-2">Próximamente</p>
-        <p class="text-sm">Estamos preparando contenido de calidad. Vuelve pronto.</p>
-      </div>
-    ) : (
-      <div>
-        <!-- Artículo destacado -->
-        {featured && (
-          <div class="mb-12">
-            <PostCard post={featured} featured />
-          </div>
-        )}
+    <!-- Google Tag Manager -->
+    <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WRLGF3DT');</script>
+    <!-- End Google Tag Manager -->
 
-        <!-- CTA inline -->
-        {posts.length > 1 && (
-          <div class="mb-10">
-            <CTA variant="inline" />
-          </div>
-        )}
+    <!-- PostHog Analytics -->
+    <script is:inline>
+        !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+        posthog.init('phc_MNqyAHXrvsMk23JWlNycH3jgYexvlhpCLz89qOvHSG4', {
+            api_host: 'https://us.i.posthog.com',
+            person_profiles: 'always',
+            capture_pageview: true,
+            capture_pageleave: true,
+            autocapture: true,
+            session_recording: {
+                maskAllInputs: false,
+                maskInputOptions: {
+                    password: true
+                }
+            }
+        });
+    </script>
 
-        <!-- Grid de artículos -->
-        {rest.length > 0 && (
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-            {rest.map((post: any) => (
-              <PostCard post={post} />
-            ))}
-          </div>
-        )}
-      </div>
-    )}
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- CTA final -->
-    <div class="mt-16">
-      <CTA variant="bottom" text="¿Tienes dudas sobre tu cambio de nombre?" />
-    </div>
-  </div>
-</BaseLayout>
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom Tailwind Config -->
+    <script is:inline>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: {
+                            50: '#FFFBF5',
+                            100: '#F5F0E8',
+                            200: '#E5E0D8',
+                        },
+                        dark: {
+                            DEFAULT: '#1A1A1A',
+                            light: '#4A4A4A',
+                            muted: '#8A8A8A',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Schema LegalService -->
+    <script is:inline type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LegalService",
+      "name": "Nombre Legal",
+      "description": "Gestión legal completa para tu cambio de nombre y apellidos en Chile. Te acompañamos en todo el proceso ante tribunales, respaldado por la Ley 17.344.",
+      "url": "https://nombrelegal.cl",
+      "telephone": "+56981797430",
+      "areaServed": { "@type": "Country", "name": "Chile" },
+      "serviceType": ["Cambio de nombre", "Cambio de apellido", "Identidad de género", "Rectificación"],
+      "priceRange": "$150.000 - $350.000 CLP",
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+        "opens": "09:00",
+        "closes": "18:00"
+      }
+    }
+    </script>
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Testimonial Carousel */
+        .testimonial-container {
+            overflow: hidden;
+        }
+
+        .testimonial-track {
+            display: flex;
+            animation: scroll 30s linear infinite;
+        }
+
+        .testimonial-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+    </style>
+</head>
+<body class="bg-cream-50 font-sans text-dark antialiased">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WRLGF3DT"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 bg-cream-50/80 backdrop-blur-md z-50 border-b border-cream-200">
+        <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <a href="/" class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="200" height="44" viewBox="0 0 400 88" role="img" aria-label="Nombre Legal logo">
+                      <g transform="translate(4, 4)">
+                        <!-- Scales icon -->
+                        <g transform="translate(4, 6) scale(0.9)">
+                          <circle cx="40" cy="8" r="5" fill="#1A1A1A"/>
+                          <rect x="4" y="12" width="72" height="5" rx="2" fill="#1A1A1A"/>
+                          <rect x="37" y="17" width="6" height="40" fill="#1A1A1A"/>
+                          <rect x="26" y="57" width="28" height="5" rx="2" fill="#1A1A1A"/>
+                          <line x1="10" y1="17" x2="10" y2="38" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+                          <line x1="70" y1="17" x2="70" y2="38" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+                          <ellipse cx="10" cy="42" rx="13" ry="4" fill="#D4A84B"/>
+                          <path d="M-3 42 Q10 56 23 42" fill="#B8872B"/>
+                          <ellipse cx="70" cy="42" rx="13" ry="4" fill="#D4A84B"/>
+                          <path d="M57 42 Q70 56 83 42" fill="#B8872B"/>
+                        </g>
+                        <line x1="82" y1="12" x2="82" y2="68" stroke="#B8872B" stroke-width="2" stroke-linecap="round"/>
+                        <text x="96" y="52" font-family="Georgia, 'Times New Roman', serif" font-size="38" fill="#1A1A1A">
+                          <tspan font-weight="700">Nombre</tspan>
+                          <tspan font-weight="700" fill="#B8872B"> Legal</tspan>
+                        </text>
+                      </g>
+                    </svg>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#proceso" class="text-dark-light hover:text-dark transition-colors">Proceso</a>
+                    <a href="#servicios" class="text-dark-light hover:text-dark transition-colors">Servicios</a>
+                    <a href="#garantias" class="text-dark-light hover:text-dark transition-colors">Garantías</a>
+                    <a href="#precio" class="text-dark-light hover:text-dark transition-colors">Precio</a>
+                    <a href="#preguntas" class="text-dark-light hover:text-dark transition-colors">Preguntas Frecuentes</a>
+                    <a href="/blog" class="text-dark-light hover:text-dark transition-colors">Blog</a>
+                </div>
+
+                <!-- CTA Button -->
+                <a href="#contacto" class="hidden sm:inline-flex items-center px-4 py-2 bg-dark text-white rounded-full text-sm font-medium hover:bg-dark-light transition-colors">
+                    Consulta Gratis
+                </a>
+
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-cream-200">
+            <div class="px-4 py-4 space-y-3">
+                <a href="#proceso" class="block text-dark-light hover:text-dark">Proceso</a>
+                <a href="#servicios" class="block text-dark-light hover:text-dark">Servicios</a>
+                <a href="#garantias" class="block text-dark-light hover:text-dark">Garantías</a>
+                <a href="#precio" class="block text-dark-light hover:text-dark">Precio</a>
+                <a href="#preguntas" class="block text-dark-light hover:text-dark">Preguntas Frecuentes</a>
+                <a href="/blog" class="block text-dark-light hover:text-dark">Blog</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 lg:pt-32 lg:pb-24">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <!-- Left Content -->
+                <div>
+                    <p class="text-dark-muted text-sm font-medium mb-4">Servicio Legal Profesional</p>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-6">
+                        Cambia tu nombre.<br>
+                        <span class="text-dark-light">Comienza de nuevo.</span>
+                    </h1>
+                    <p class="text-lg text-dark-light mb-8 max-w-lg">
+                        Gestión legal completa para tu cambio de nombre y apellidos en Chile. Te acompañamos en todo el proceso ante tribunales.
+                    </p>
+
+                    <!-- Trust badges -->
+                    <div class="flex flex-wrap items-center gap-4 mb-8">
+                        <div class="flex items-center text-sm text-dark-muted">
+                            <svg class="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Ley 17.344 vigente
+                        </div>
+                        <div class="flex items-center text-sm text-dark-muted">
+                            <svg class="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Asesoría Gratuita
+                        </div>
+                        <div class="flex items-center text-sm text-dark-muted">
+                            <svg class="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Todo Chile
+                        </div>
+                    </div>
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-wrap gap-4">
+                        <a href="https://wa.me/56981797430?text=Hola,%20me%20interesa%20el%20servicio%20de%20cambio%20de%20nombre" target="_blank" class="inline-flex items-center px-6 py-3 bg-dark text-white rounded-full font-medium hover:bg-dark-light transition-colors">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                            </svg>
+                            WhatsApp
+                        </a>
+                        <a href="tel:+56981797430" class="inline-flex items-center px-6 py-3 border border-dark text-dark rounded-full font-medium hover:bg-dark hover:text-white transition-colors">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/>
+                            </svg>
+                            Llamar
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right - Form -->
+                <div class="bg-white rounded-2xl shadow-xl p-6 sm:p-8 border border-cream-200">
+                    <h2 class="text-xl font-semibold mb-2">Solicita tu asesoría gratuita</h2>
+                    <p class="text-dark-muted text-sm mb-6">Te contactamos en menos de 24 horas</p>
+
+                    <form id="lead-form" class="space-y-4" onsubmit="return enviarWhatsApp(event)">
+                        <div>
+                            <label for="nombre" class="block text-sm font-medium text-dark mb-1">Nombre completo</label>
+                            <input type="text" id="nombre" name="nombre" required
+                                class="w-full px-4 py-3 rounded-xl border border-cream-200 focus:border-dark focus:ring-1 focus:ring-dark outline-none transition-colors"
+                                placeholder="Tu nombre completo">
+                        </div>
+
+                        <div>
+                            <label for="telefono" class="block text-sm font-medium text-dark mb-1">Teléfono</label>
+                            <input type="tel" id="telefono" name="telefono" required
+                                class="w-full px-4 py-3 rounded-xl border border-cream-200 focus:border-dark focus:ring-1 focus:ring-dark outline-none transition-colors"
+                                placeholder="+56 9 1234 5678">
+                        </div>
+
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-dark mb-1">Email</label>
+                            <input type="email" id="email" name="email" required
+                                class="w-full px-4 py-3 rounded-xl border border-cream-200 focus:border-dark focus:ring-1 focus:ring-dark outline-none transition-colors"
+                                placeholder="tu@email.com">
+                        </div>
+
+                        <button type="submit" class="w-full px-6 py-3 bg-dark text-white rounded-xl font-medium hover:bg-dark-light transition-colors flex items-center justify-center">
+                            Solicitar Asesoría
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+                            </svg>
+                        </button>
+                    </form>
+
+                    <p class="text-xs text-dark-muted mt-4 text-center">
+                        Tus datos están protegidos y no serán compartidos.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Timeline Section -->
+    <section id="proceso" class="py-16 lg:py-24 bg-cream-100">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <p class="text-dark-muted text-sm font-medium mb-2">Ley 17.344</p>
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Etapas del Proceso</h2>
+            </div>
+
+            <!-- Interactive Timeline -->
+            <div class="max-w-2xl mx-auto space-y-3">
+                <!-- Step 1 -->
+                <div class="timeline-item bg-white rounded-xl border border-cream-200 overflow-hidden">
+                    <button class="timeline-btn w-full px-5 py-4 flex items-center justify-between hover:bg-cream-50 transition-colors" onclick="toggleTimeline(this)">
+                        <div class="flex items-center">
+                            <span class="w-8 h-8 bg-dark text-white rounded-lg flex items-center justify-center text-sm font-bold mr-4">1</span>
+                            <span class="font-medium">Consulta inicial</span>
+                        </div>
+                        <svg class="timeline-icon w-5 h-5 text-dark-muted transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="timeline-content hidden px-5 pb-4 pt-0">
+                        <div class="pl-12 border-l-2 border-cream-200 ml-4">
+                            <p class="text-dark-light text-sm mb-3">Evaluamos tu caso y determinamos la <strong>causal legal</strong> aplicable según la Ley 17.344: nombre ridículo o que causa menoscabo, uso de otro nombre por más de 5 años, traducción de nombre extranjero, entre otras.</p>
+                            <span class="inline-block px-2 py-1 bg-green-100 text-green-700 text-xs rounded">Sin costo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="timeline-item bg-white rounded-xl border border-cream-200 overflow-hidden">
+                    <button class="timeline-btn w-full px-5 py-4 flex items-center justify-between hover:bg-cream-50 transition-colors" onclick="toggleTimeline(this)">
+                        <div class="flex items-center">
+                            <span class="w-8 h-8 bg-dark text-white rounded-lg flex items-center justify-center text-sm font-bold mr-4">2</span>
+                            <span class="font-medium">Preparación de documentos</span>
+                        </div>
+                        <svg class="timeline-icon w-5 h-5 text-dark-muted transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="timeline-content hidden px-5 pb-4 pt-0">
+                        <div class="pl-12 border-l-2 border-cream-200 ml-4">
+                            <p class="text-dark-light text-sm mb-3">Recopilamos certificado de nacimiento, certificado de antecedentes, y redactamos la demanda judicial fundamentando la causal invocada.</p>
+                            <span class="inline-block px-2 py-1 bg-cream-100 text-dark-muted text-xs rounded">1-2 semanas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="timeline-item bg-white rounded-xl border border-cream-200 overflow-hidden">
+                    <button class="timeline-btn w-full px-5 py-4 flex items-center justify-between hover:bg-cream-50 transition-colors" onclick="toggleTimeline(this)">
+                        <div class="flex items-center">
+                            <span class="w-8 h-8 bg-dark text-white rounded-lg flex items-center justify-center text-sm font-bold mr-4">3</span>
+                            <span class="font-medium">Presentación ante tribunal</span>
+                        </div>
+                        <svg class="timeline-icon w-5 h-5 text-dark-muted transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="timeline-content hidden px-5 pb-4 pt-0">
+                        <div class="pl-12 border-l-2 border-cream-200 ml-4">
+                            <p class="text-dark-light text-sm mb-3">Ingresamos la demanda al <strong>Juzgado de Letras Civil</strong> de tu domicilio. El tribunal revisa admisibilidad y asigna un rol a la causa.</p>
+                            <span class="inline-block px-2 py-1 bg-cream-100 text-dark-muted text-xs rounded">Variable</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="timeline-item bg-white rounded-xl border border-cream-200 overflow-hidden">
+                    <button class="timeline-btn w-full px-5 py-4 flex items-center justify-between hover:bg-cream-50 transition-colors" onclick="toggleTimeline(this)">
+                        <div class="flex items-center">
+                            <span class="w-8 h-8 bg-dark text-white rounded-lg flex items-center justify-center text-sm font-bold mr-4">4</span>
+                            <span class="font-medium">Publicación en Diario Oficial</span>
+                        </div>
+                        <svg class="timeline-icon w-5 h-5 text-dark-muted transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="timeline-content hidden px-5 pb-4 pt-0">
+                        <div class="pl-12 border-l-2 border-cream-200 ml-4">
+                            <p class="text-dark-light text-sm mb-3">Se publica extracto de la solicitud en el Diario Oficial (días 1 o 15 de cada mes). Inicia período de <strong>30 días hábiles</strong> para oposiciones de terceros.</p>
+                            <span class="inline-block px-2 py-1 bg-amber-100 text-amber-700 text-xs rounded">30 días hábiles (legal)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="timeline-item bg-white rounded-xl border border-cream-200 overflow-hidden">
+                    <button class="timeline-btn w-full px-5 py-4 flex items-center justify-between hover:bg-cream-50 transition-colors" onclick="toggleTimeline(this)">
+                        <div class="flex items-center">
+                            <span class="w-8 h-8 bg-dark text-white rounded-lg flex items-center justify-center text-sm font-bold mr-4">5</span>
+                            <span class="font-medium">Audiencia con testigos</span>
+                        </div>
+                        <svg class="timeline-icon w-5 h-5 text-dark-muted transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="timeline-content hidden px-5 pb-4 pt-0">
+                        <div class="pl-12 border-l-2 border-cream-200 ml-4">
+                            <p class="text-dark-light text-sm mb-3">Compareces ante el <strong>receptor judicial</strong> con <strong>2 testigos mayores de edad</strong> (idealmente no familiares) que declaran conocerte y dan fe de la causal invocada.</p>
+                            <span class="inline-block px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded">Presencial</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 6 -->
+                <div class="timeline-item bg-white rounded-xl border border-cream-200 overflow-hidden">
+                    <button class="timeline-btn w-full px-5 py-4 flex items-center justify-between hover:bg-cream-50 transition-colors" onclick="toggleTimeline(this)">
+                        <div class="flex items-center">
+                            <span class="w-8 h-8 bg-dark text-white rounded-lg flex items-center justify-center text-sm font-bold mr-4">6</span>
+                            <span class="font-medium">Sentencia judicial</span>
+                        </div>
+                        <svg class="timeline-icon w-5 h-5 text-dark-muted transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="timeline-content hidden px-5 pb-4 pt-0">
+                        <div class="pl-12 border-l-2 border-cream-200 ml-4">
+                            <p class="text-dark-light text-sm mb-3">El juez dicta sentencia autorizando (o rechazando) el cambio. Una vez ejecutoriada, se oficia al Registro Civil.</p>
+                            <span class="inline-block px-2 py-1 bg-cream-100 text-dark-muted text-xs rounded">Variable</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 7 -->
+                <div class="timeline-item bg-white rounded-xl border border-green-200 overflow-hidden">
+                    <button class="timeline-btn w-full px-5 py-4 flex items-center justify-between hover:bg-green-50 transition-colors" onclick="toggleTimeline(this)">
+                        <div class="flex items-center">
+                            <span class="w-8 h-8 bg-green-600 text-white rounded-lg flex items-center justify-center text-sm font-bold mr-4">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            </span>
+                            <span class="font-medium text-green-700">Inscripción en Registro Civil</span>
+                        </div>
+                        <svg class="timeline-icon w-5 h-5 text-green-600 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="timeline-content hidden px-5 pb-4 pt-0">
+                        <div class="pl-12 border-l-2 border-green-200 ml-4">
+                            <p class="text-dark-light text-sm mb-3">Se inscribe la sentencia y se actualiza tu partida de nacimiento. Recibes certificado con tu nuevo nombre oficial.</p>
+                            <span class="inline-block px-2 py-1 bg-green-100 text-green-700 text-xs rounded">Etapa final</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Disclaimer + Time estimate -->
+            <div class="max-w-2xl mx-auto mt-8">
+                <div class="bg-white rounded-xl border border-cream-200 p-5">
+                    <div class="flex items-start gap-3 mb-4">
+                        <svg class="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/>
+                        </svg>
+                        <div>
+                            <p class="font-medium text-dark mb-1">Tiempo estimado: 4 a 12 meses</p>
+                            <p class="text-dark-muted text-sm">Los plazos varían significativamente según la carga de trabajo del tribunal de tu jurisdicción, la complejidad del caso, y si existen oposiciones. No podemos garantizar tiempos específicos.</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-dark-muted border-t border-cream-200 pt-3">
+                        Fuente: <a href="https://www.bcn.cl/leychile/navegar?idNorma=28940" target="_blank" rel="noopener" class="underline hover:text-dark">Ley 17.344</a> que autoriza el cambio de nombres y apellidos.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios" class="py-16 lg:py-24">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 lg:mb-16">
+                <p class="text-dark-muted text-sm font-medium mb-2">Servicios</p>
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Tipos de cambio que gestionamos</h2>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Service 1 -->
+                <div class="bg-white rounded-2xl p-6 border border-cream-200 hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 bg-cream-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Cambio de Nombre</h3>
+                    <p class="text-dark-light text-sm">Modifica tu nombre propio por uno que te identifique mejor.</p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-white rounded-2xl p-6 border border-cream-200 hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 bg-cream-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Cambio de Apellidos</h3>
+                    <p class="text-dark-light text-sm">Altera el orden de tus apellidos según la Ley 21.334 o realiza cambios específicos.</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-white rounded-2xl p-6 border border-cream-200 hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 bg-cream-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Rectificación</h3>
+                    <p class="text-dark-light text-sm">Corrige errores en tu partida de nacimiento o documentos oficiales.</p>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="bg-white rounded-2xl p-6 border border-cream-200 hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 bg-cream-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Identidad de Género</h3>
+                    <p class="text-dark-light text-sm">Cambio de nombre y sexo registral según Ley 21.120.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Garantías Section -->
+    <section id="garantias" class="py-16 lg:py-24 bg-cream-100">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <p class="text-dark-muted text-sm font-medium mb-2">Nuestro Compromiso</p>
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Garantías de Nuestro Servicio</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Garantía 1 -->
+                <div class="bg-white rounded-2xl p-6 border border-cream-200">
+                    <div class="w-12 h-12 bg-cream-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2">Marco Legal Vigente</h3>
+                    <p class="text-dark-light text-sm">Proceso regulado por la <strong>Ley 17.344</strong>. Tu solicitud debe estar amparada en una causal legal (nombre que te menoscabe, uso prolongado de otro nombre, etc.).</p>
+                </div>
+
+                <!-- Garantía 2 -->
+                <div class="bg-white rounded-2xl p-6 border border-cream-200">
+                    <div class="w-12 h-12 bg-cream-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2">Gestión Judicial Completa</h3>
+                    <p class="text-dark-light text-sm">Presentamos tu solicitud ante el <strong>Juzgado de Letras Civil</strong> de tu domicilio. Una vez aprobada, se inscribe en el Registro Civil.</p>
+                </div>
+
+                <!-- Garantía 3 -->
+                <div class="bg-white rounded-2xl p-6 border border-cream-200">
+                    <div class="w-12 h-12 bg-cream-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2">Precio Transparente</h3>
+                    <p class="text-dark-light text-sm">Honorarios profesionales desde <strong>$150.000</strong>. Te detallamos todos los costos adicionales (publicación, receptor, Registro Civil) antes de comenzar.</p>
+                </div>
+
+                <!-- Garantía 4 -->
+                <div class="bg-white rounded-2xl p-6 border border-cream-200">
+                    <div class="w-12 h-12 bg-cream-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2">Confidencialidad Total</h3>
+                    <p class="text-dark-light text-sm">Tu información personal es tratada con <strong>absoluta reserva</strong>. No compartimos datos con terceros bajo ninguna circunstancia.</p>
+                </div>
+
+                <!-- Garantía 5 -->
+                <div class="bg-white rounded-2xl p-6 border border-cream-200">
+                    <div class="w-12 h-12 bg-cream-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2">Atención en Todo Chile</h3>
+                    <p class="text-dark-light text-sm">Gestionamos tu caso en el <strong>tribunal de tu domicilio</strong>. Coordinamos testigos y trámites para minimizar tus desplazamientos.</p>
+                </div>
+
+                <!-- Garantía 6 -->
+                <div class="bg-white rounded-2xl p-6 border border-cream-200">
+                    <div class="w-12 h-12 bg-cream-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2">Acompañamiento Constante</h3>
+                    <p class="text-dark-light text-sm">Te mantenemos <strong>informado en cada etapa</strong> del proceso. Respuesta a tus consultas en menos de 24 horas.</p>
+                </div>
+            </div>
+
+            <!-- Legal Reference -->
+            <div class="mt-12 text-center">
+                <p class="text-dark-muted text-sm">
+                    Proceso judicial regulado por la <a href="https://www.bcn.cl/leychile/navegar?idNorma=28940" target="_blank" rel="noopener" class="underline hover:text-dark">Ley 17.344</a>.
+                    La solicitud se presenta ante el Juzgado de Letras Civil y, una vez aprobada, se inscribe en el Registro Civil.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="precio" class="py-16 lg:py-24">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <p class="text-dark-muted text-sm font-medium mb-2">Inversión Transparente</p>
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Desglose de Costos</h2>
+            </div>
+
+            <div class="max-w-3xl mx-auto">
+                <div class="bg-white rounded-2xl shadow-xl border border-cream-200 overflow-hidden">
+                    <div class="divide-y divide-cream-200">
+                        <!-- Item 1 -->
+                        <div class="flex items-center justify-between p-5 hover:bg-cream-50 transition-colors">
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 text-green-600 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <div>
+                                    <p class="font-medium text-dark">Honorarios profesionales</p>
+                                    <p class="text-sm text-dark-muted">Asesoría, redacción y gestión judicial</p>
+                                </div>
+                            </div>
+                            <span class="font-semibold text-dark whitespace-nowrap ml-4">$150.000</span>
+                        </div>
+
+                        <!-- Item 2 -->
+                        <div class="flex items-center justify-between p-5 hover:bg-cream-50 transition-colors">
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 text-green-600 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <div>
+                                    <p class="font-medium text-dark">Publicación en Diario Oficial</p>
+                                    <p class="text-sm text-dark-muted">Extracto publicado días 1 o 15 del mes</p>
+                                </div>
+                            </div>
+                            <span class="font-semibold text-dark whitespace-nowrap ml-4">$10.000 - $20.000</span>
+                        </div>
+
+                        <!-- Item 3 -->
+                        <div class="flex items-center justify-between p-5 hover:bg-cream-50 transition-colors">
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 text-green-600 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <div>
+                                    <p class="font-medium text-dark">Receptor judicial</p>
+                                    <p class="text-sm text-dark-muted">Notificaciones según <a href="https://www.pjud.cl/docs/download/90333" target="_blank" rel="noopener" class="underline">arancel vigente</a></p>
+                                </div>
+                            </div>
+                            <span class="font-semibold text-dark whitespace-nowrap ml-4">$50.000 - $150.000</span>
+                        </div>
+
+                        <!-- Item 4 -->
+                        <div class="flex items-center justify-between p-5 hover:bg-cream-50 transition-colors">
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 text-green-600 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <div>
+                                    <p class="font-medium text-dark">Inscripción en Registro Civil</p>
+                                    <p class="text-sm text-dark-muted">Subinscripción de sentencia</p>
+                                </div>
+                            </div>
+                            <span class="font-semibold text-dark whitespace-nowrap ml-4">$5.000 - $15.000</span>
+                        </div>
+
+                        <!-- Item 5 -->
+                        <div class="flex items-center justify-between p-5 hover:bg-cream-50 transition-colors">
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 text-green-600 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <div>
+                                    <p class="font-medium text-dark">Certificados y documentos</p>
+                                    <p class="text-sm text-dark-muted">Nacimiento, antecedentes, copias autorizadas</p>
+                                </div>
+                            </div>
+                            <span class="font-semibold text-dark whitespace-nowrap ml-4">$5.000 - $15.000</span>
+                        </div>
+                    </div>
+
+                    <!-- Total -->
+                    <div class="bg-cream-100 p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-lg font-bold text-dark">Rango de Inversión Total</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-2xl font-bold text-dark">$220.000 - $350.000</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CTA -->
+                    <div class="p-6 bg-white border-t border-cream-200">
+                        <a href="#contacto" class="inline-flex items-center justify-center w-full px-8 py-4 bg-dark text-white rounded-xl font-medium hover:bg-dark-light transition-colors">
+                            Solicitar Asesoría Gratuita
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Disclaimer -->
+                <div class="mt-6 bg-amber-50 border border-amber-200 rounded-xl p-4">
+                    <div class="flex items-start gap-3">
+                        <svg class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/>
+                        </svg>
+                        <div class="text-sm text-amber-800">
+                            <p class="font-medium mb-1">Importante sobre los costos</p>
+                            <p>Los valores del receptor judicial varían según el número de notificaciones requeridas y la ubicación. El arancel está regulado por el <a href="https://www.pjud.cl/docs/download/90333" target="_blank" rel="noopener" class="underline">Decreto Exento N°1.725/2024</a> del Ministerio de Justicia. Te entregaremos un presupuesto detallado según tu caso específico.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Section -->
+    <section class="py-16 lg:py-24 bg-cream-100">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <p class="text-dark-muted text-sm font-medium mb-2">¿Por qué elegirnos?</p>
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Respaldo y Confianza</h2>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-sm">
+                        <svg class="w-7 h-7 text-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold mb-2">Ley 17.344</h3>
+                    <p class="text-dark-light text-sm">Proceso 100% legal respaldado por la legislación chilena.</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-sm">
+                        <svg class="w-7 h-7 text-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold mb-2">100% Confidencial</h3>
+                    <p class="text-dark-light text-sm">Tu información personal está protegida en todo momento.</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-sm">
+                        <svg class="w-7 h-7 text-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold mb-2">Todo Chile</h3>
+                    <p class="text-dark-light text-sm">Atendemos a clientes de todas las regiones del país.</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-sm">
+                        <svg class="w-7 h-7 text-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold mb-2">Causales Legales</h3>
+                    <p class="text-dark-light text-sm">La ley contempla causales específicas. Te ayudamos a identificar la tuya.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Preguntas Frecuentes Section -->
+    <section id="preguntas" class="py-16 lg:py-24">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <p class="text-dark-muted text-sm font-medium mb-2">Resolvemos tus dudas</p>
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Preguntas Frecuentes</h2>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="faq-item bg-white rounded-2xl border border-cream-200 overflow-hidden">
+                    <button class="faq-button w-full px-6 py-5 text-left flex items-center justify-between hover:bg-cream-50 transition-colors" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-dark pr-4">¿Quiénes pueden cambiar su nombre o apellido en Chile?</span>
+                        <svg class="faq-icon w-5 h-5 text-dark-muted flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 pt-2 border-t border-cream-200">
+                        <p class="text-dark-light">Cualquier persona mayor de 18 años con nacionalidad chilena o residencia definitiva puede solicitar el cambio de nombre o apellido ante el Juzgado de Letras Civil. La Ley 17.344 establece <strong>causales específicas</strong>: nombre que cause menoscabo moral o material, uso prolongado de otro nombre (más de 5 años), entre otras. Te ayudamos a identificar la causal que aplica a tu caso. Solo se requiere no tener condenas vigentes por ciertos delitos.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="faq-item bg-white rounded-2xl border border-cream-200 overflow-hidden">
+                    <button class="faq-button w-full px-6 py-5 text-left flex items-center justify-between hover:bg-cream-50 transition-colors" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-dark pr-4">¿Cuánto demora el proceso de cambio de nombre?</span>
+                        <svg class="faq-icon w-5 h-5 text-dark-muted flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 pt-2 border-t border-cream-200">
+                        <p class="text-dark-light">El trámite judicial tiene un tiempo promedio de <strong>6 a 9 meses</strong> desde la presentación de la solicitud ante el Juzgado de Letras Civil. Esto incluye: admisibilidad de la solicitud, publicación en el Diario Oficial (obligatoria por ley), período de 30 días para posibles oposiciones, audiencia con testigos, sentencia del tribunal, y finalmente la inscripción en el Registro Civil. Nosotros nos encargamos de todo el seguimiento judicial.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="faq-item bg-white rounded-2xl border border-cream-200 overflow-hidden">
+                    <button class="faq-button w-full px-6 py-5 text-left flex items-center justify-between hover:bg-cream-50 transition-colors" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-dark pr-4">¿Qué documentos necesito para iniciar el trámite?</span>
+                        <svg class="faq-icon w-5 h-5 text-dark-muted flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 pt-2 border-t border-cream-200">
+                        <ul class="text-dark-light space-y-2">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                Cédula de identidad vigente
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                Certificado de nacimiento (lo podemos obtener nosotros)
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                Certificado de antecedentes (lo podemos obtener nosotros)
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                El nombre o apellido que deseas usar
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="faq-item bg-white rounded-2xl border border-cream-200 overflow-hidden">
+                    <button class="faq-button w-full px-6 py-5 text-left flex items-center justify-between hover:bg-cream-50 transition-colors" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-dark pr-4">¿El trámite es ante el Registro Civil o ante un tribunal?</span>
+                        <svg class="faq-icon w-5 h-5 text-dark-muted flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 pt-2 border-t border-cream-200">
+                        <p class="text-dark-light">El cambio de nombre bajo la Ley 17.344 es un <strong>proceso judicial</strong> que se tramita ante el <strong>Juzgado de Letras Civil</strong> de tu domicilio. Requiere presentación de demanda, publicación en Diario Oficial, audiencia con testigos ante receptor judicial, y sentencia del tribunal. Una vez aprobado por el juez, la sentencia se inscribe en el Registro Civil para actualizar tu partida de nacimiento.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 5 -->
+                <div class="faq-item bg-white rounded-2xl border border-cream-200 overflow-hidden">
+                    <button class="faq-button w-full px-6 py-5 text-left flex items-center justify-between hover:bg-cream-50 transition-colors" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-dark pr-4">¿Puedo cambiar nombre y apellido al mismo tiempo?</span>
+                        <svg class="faq-icon w-5 h-5 text-dark-muted flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 pt-2 border-t border-cream-200">
+                        <p class="text-dark-light">Sí, es posible solicitar el cambio de nombre propio y apellido(s) en un mismo trámite. También puedes optar por cambiar solo uno de ellos. En el caso de apellidos, puedes modificar el orden (poner el materno antes del paterno) o cambiarlos completamente. La ley permite <strong>una sola modificación por vida</strong>, salvo excepciones específicas.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 6 -->
+                <div class="faq-item bg-white rounded-2xl border border-cream-200 overflow-hidden">
+                    <button class="faq-button w-full px-6 py-5 text-left flex items-center justify-between hover:bg-cream-50 transition-colors" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-dark pr-4">¿Qué pasa con mis documentos actuales después del cambio?</span>
+                        <svg class="faq-icon w-5 h-5 text-dark-muted flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 pt-2 border-t border-cream-200">
+                        <p class="text-dark-light">Una vez aprobado el cambio, deberás actualizar tu cédula de identidad, pasaporte, licencia de conducir y otros documentos oficiales. Te entregamos una <strong>guía completa</strong> con todos los pasos para actualizar tus documentos en bancos, AFP, Isapre/Fonasa, SII, y otras instituciones. El proceso es sencillo una vez que tienes tu nuevo certificado de nacimiento.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 7 -->
+                <div class="faq-item bg-white rounded-2xl border border-cream-200 overflow-hidden">
+                    <button class="faq-button w-full px-6 py-5 text-left flex items-center justify-between hover:bg-cream-50 transition-colors" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-dark pr-4">¿Por qué debería contratar un servicio profesional?</span>
+                        <svg class="faq-icon w-5 h-5 text-dark-muted flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 pt-2 border-t border-cream-200">
+                        <p class="text-dark-light">Aunque el trámite parece sencillo, hay varios aspectos técnicos que pueden retrasar o rechazar tu solicitud: redacción correcta de la solicitud, plazos legales, publicación en el Diario Oficial, y seguimiento del proceso. Nuestro servicio te garantiza que todo se haga correctamente la primera vez, <strong>evitando errores costosos</strong> y pérdidas de tiempo. Además, mantenemos comunicación constante contigo durante todo el proceso.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 8 -->
+                <div class="faq-item bg-white rounded-2xl border border-cream-200 overflow-hidden">
+                    <button class="faq-button w-full px-6 py-5 text-left flex items-center justify-between hover:bg-cream-50 transition-colors" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-dark pr-4">¿La asesoría inicial tiene algún costo?</span>
+                        <svg class="faq-icon w-5 h-5 text-dark-muted flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 pt-2 border-t border-cream-200">
+                        <p class="text-dark-light">No, la <strong>asesoría inicial es completamente gratuita</strong>. Evaluamos tu caso, te explicamos el proceso, resolvemos todas tus dudas y te damos un presupuesto transparente. Solo si decides continuar con nosotros, procedemos con el trámite. Sin compromisos ni costos ocultos.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA after FAQ -->
+            <div class="mt-12 text-center">
+                <p class="text-dark-light mb-4">¿Tienes más preguntas? Estamos para ayudarte</p>
+                <a href="https://wa.me/56981797430?text=Hola,%20tengo%20una%20consulta%20sobre%20el%20cambio%20de%20nombre" target="_blank" class="inline-flex items-center px-6 py-3 bg-green-600 text-white rounded-xl font-medium hover:bg-green-700 transition-colors">
+                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                    Consultar por WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section id="contacto" class="py-16 lg:py-24 bg-dark text-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl sm:text-4xl font-bold mb-6">¿Listo para comenzar?</h2>
+                    <p class="text-gray-300 mb-8 text-lg">
+                        Contáctanos hoy y da el primer paso hacia tu nuevo nombre. Asesoría inicial sin costo.
+                    </p>
+
+                    <div class="space-y-4">
+                        <a href="https://wa.me/56981797430?text=Hola,%20me%20interesa%20el%20servicio%20de%20cambio%20de%20nombre" target="_blank" class="flex items-center text-lg hover:text-gray-300 transition-colors">
+                            <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                            </svg>
+                            WhatsApp: +56 9 8179 7430
+                        </a>
+                        <a href="tel:+56981797430" class="flex items-center text-lg hover:text-gray-300 transition-colors">
+                            <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/>
+                            </svg>
+                            Llamar: +56 9 8179 7430
+                        </a>
+                        <div class="flex items-center text-lg text-gray-300">
+                            <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            Horario: Lunes a Viernes, 9:00 - 18:00 hrs
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 sm:p-8 text-dark">
+                    <h3 class="text-xl font-semibold mb-6">Escríbenos</h3>
+
+                    <form id="contact-form" class="space-y-4" onsubmit="return enviarWhatsApp(event)">
+                        <div>
+                            <input type="text" name="nombre" required
+                                class="w-full px-4 py-3 rounded-xl border border-cream-200 focus:border-dark focus:ring-1 focus:ring-dark outline-none transition-colors"
+                                placeholder="Tu nombre">
+                        </div>
+                        <div>
+                            <input type="tel" name="telefono" required
+                                class="w-full px-4 py-3 rounded-xl border border-cream-200 focus:border-dark focus:ring-1 focus:ring-dark outline-none transition-colors"
+                                placeholder="Tu teléfono">
+                        </div>
+                        <button type="submit" class="w-full px-6 py-3 bg-dark text-white rounded-xl font-medium hover:bg-dark-light transition-colors">
+                            Solicitar Contacto
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-dark border-t border-gray-800">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p class="text-gray-400 text-sm">
+                    © 2026 Nombre Legal. Todos los derechos reservados.
+                </p>
+                <div class="flex items-center space-x-6">
+                    <a href="/blog" class="text-gray-400 hover:text-white transition-colors text-sm">Blog</a>
+                    <a href="https://wa.me/56981797430" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                        </svg>
+                    </a>
+                    <a href="tel:+56981797430" class="text-gray-400 hover:text-white transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script is:inline>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Google Ads GCLID capture
+        function getGclid() {
+            const storedGclid = localStorage.getItem('gclid');
+            if (storedGclid) return storedGclid;
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const gclid = urlParams.get('gclid');
+            if (gclid) {
+                localStorage.setItem('gclid', gclid);
+                return gclid;
+            }
+            return null;
+        }
+
+        (function() {
+            const gclid = getGclid();
+            if (gclid && window.posthog) {
+                posthog.register({ gclid: gclid });
+            }
+        })();
+
+        // Telegram Bot
+        const TELEGRAM_BOT_TOKEN = '8200846082:AAFEXMBVPDUIxIKBcbivyUcK0GFftew4hDs';
+        const TELEGRAM_CHAT_ID = '1686674702';
+
+        // Form submission
+        async function enviarWhatsApp(event) {
+            event.preventDefault();
+
+            const form = event.target;
+            const formData = new FormData(form);
+
+            const nombre = formData.get('nombre') || '';
+            const telefono = formData.get('telefono') || '';
+            const email = formData.get('email') || '';
+
+            // PostHog tracking
+            if (window.posthog) {
+                if (email) {
+                    posthog.identify(email, {
+                        name: nombre,
+                        phone: telefono,
+                        email: email
+                    });
+                }
+                posthog.capture('lead_submitted', {
+                    nombre: nombre,
+                    tiene_telefono: !!telefono,
+                    tiene_email: !!email,
+                    formulario: form.id,
+                    gclid: getGclid()
+                });
+            }
+
+            // GTM
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                'event': 'lead_submitted',
+                'lead_name': nombre,
+                'lead_email': email,
+                'lead_form': form.id
+            });
+
+            // Telegram notification
+            if (TELEGRAM_BOT_TOKEN !== 'TU_BOT_TOKEN') {
+                const mensaje = `🔔 *Nuevo Lead*\n\n👤 *Nombre:* ${nombre}\n📞 *Teléfono:* ${telefono}\n📧 *Email:* ${email}`;
+                fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: mensaje,
+                        parse_mode: 'Markdown'
+                    })
+                }).catch(err => console.log('Error enviando a Telegram:', err));
+            }
+
+            // Email via Cloudflare Worker
+            fetch('https://resend-proxy.csgrinbergs.workers.dev', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    from: 'Nombre Legal <notificaciones@nombrelegal.cl>',
+                    to: ['csgrinbergs@gmail.com', 'alagnomarin@gmail.com'],
+                    subject: `Nuevo Lead: ${nombre}`,
+                    html: `
+                        <h2>Nuevo Lead desde nombrelegal.cl</h2>
+                        <p><strong>Nombre:</strong> ${nombre}</p>
+                        <p><strong>Teléfono:</strong> ${telefono || 'No proporcionado'}</p>
+                        <p><strong>Email:</strong> ${email || 'No proporcionado'}</p>
+                        <p><a href="https://wa.me/56${telefono?.replace(/\s/g, '').replace('+56', '')}">Contactar por WhatsApp</a></p>
+                    `
+                })
+            }).catch(err => console.log('Error enviando email:', err));
+
+            // Show confirmation
+            form.innerHTML = `
+                <div class="text-center py-8">
+                    <svg class="w-16 h-16 mx-auto text-green-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <h3 class="text-xl font-semibold mb-2">¡Mensaje enviado!</h3>
+                    <p class="text-dark-muted">Te contactaremos pronto por WhatsApp.</p>
+                </div>
+            `;
+
+            return false;
+        }
+
+        // Timeline Accordion
+        function toggleTimeline(button) {
+            const item = button.closest('.timeline-item');
+            const content = item.querySelector('.timeline-content');
+            const icon = button.querySelector('.timeline-icon');
+            content.classList.toggle('hidden');
+            icon.classList.toggle('rotate-180');
+        }
+
+        // FAQ Accordion
+        function toggleFaq(button) {
+            const faqItem = button.closest('.faq-item');
+            const content = faqItem.querySelector('.faq-content');
+            const icon = faqItem.querySelector('.faq-icon');
+
+            document.querySelectorAll('.faq-item').forEach(item => {
+                if (item !== faqItem) {
+                    item.querySelector('.faq-content').classList.add('hidden');
+                    item.querySelector('.faq-icon').classList.remove('rotate-180');
+                }
+            });
+
+            content.classList.toggle('hidden');
+            icon.classList.toggle('rotate-180');
+        }
+    </script>
+</body>
+</html>
