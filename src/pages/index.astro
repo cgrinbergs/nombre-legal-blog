@@ -105,6 +105,103 @@
     }
     </script>
 
+    <!-- Schema HowTo (timeline de pasos) -->
+    <script is:inline type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Cómo cambiar de nombre en Chile (Ley 17.344)",
+      "description": "Guía paso a paso del proceso judicial para cambiar de nombre o apellido en Chile.",
+      "totalTime": "P6M",
+      "estimatedCost": { "@type": "MonetaryAmount", "currency": "CLP", "value": "220000" },
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Consulta inicial",
+          "text": "Evaluamos tu caso y determinamos la causal legal aplicable según la Ley 17.344.",
+          "url": "https://nombrelegal.cl/#proceso"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Preparación de documentos",
+          "text": "Recopilamos certificado de nacimiento, certificado de antecedentes, y redactamos la demanda judicial."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Presentación ante tribunal",
+          "text": "Ingresamos la demanda al Juzgado de Letras Civil de tu domicilio."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Publicación en Diario Oficial",
+          "text": "Se publica extracto en el Diario Oficial. Inicia período de 30 días hábiles para oposiciones."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "name": "Audiencia con testigos",
+          "text": "Compareces ante el receptor judicial con 2 testigos mayores de edad."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 6,
+          "name": "Sentencia judicial",
+          "text": "El juez dicta sentencia autorizando el cambio. Una vez ejecutoriada, se oficia al Registro Civil."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 7,
+          "name": "Inscripción en Registro Civil",
+          "text": "Se inscribe la sentencia y se actualiza tu partida de nacimiento con tu nuevo nombre oficial."
+        }
+      ]
+    }
+    </script>
+
+    <!-- Schema FAQPage -->
+    <script is:inline type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Quiénes pueden cambiar su nombre o apellido en Chile?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Cualquier persona mayor de 18 años con nacionalidad chilena o residencia definitiva puede solicitar el cambio de nombre o apellido ante el Juzgado de Letras Civil. La Ley 17.344 establece causales específicas: nombre que cause menoscabo moral o material, uso prolongado de otro nombre (más de 5 años), entre otras. Solo se requiere no tener condenas vigentes por ciertos delitos." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto demora el proceso de cambio de nombre?",
+          "acceptedAnswer": { "@type": "Answer", "text": "El trámite judicial tiene un tiempo promedio de 6 a 9 meses desde la presentación ante el Juzgado de Letras Civil. Esto incluye publicación en el Diario Oficial, período de 30 días para oposiciones, audiencia con testigos, sentencia e inscripción en el Registro Civil." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto cuesta cambiar de nombre en Chile?",
+          "acceptedAnswer": { "@type": "Answer", "text": "El costo total varía entre $220.000 y $350.000 CLP. Incluye honorarios profesionales ($150.000), publicación en Diario Oficial ($10.000-$20.000), receptor judicial ($50.000-$150.000), inscripción en Registro Civil ($5.000-$15.000) y certificados ($5.000-$15.000)." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El trámite es ante el Registro Civil o ante un tribunal?",
+          "acceptedAnswer": { "@type": "Answer", "text": "El cambio de nombre bajo la Ley 17.344 es un proceso judicial que se tramita ante el Juzgado de Letras Civil de tu domicilio. Una vez aprobado por el juez, la sentencia se inscribe en el Registro Civil para actualizar tu partida de nacimiento." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo cambiar nombre y apellido al mismo tiempo?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Sí, es posible solicitar el cambio de nombre propio y apellido(s) en un mismo trámite. La ley permite una sola modificación por vida, salvo excepciones específicas." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿La asesoría inicial tiene algún costo?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No, la asesoría inicial es completamente gratuita. Evaluamos tu caso, te explicamos el proceso, resolvemos todas tus dudas y te damos un presupuesto transparente. Sin compromisos ni costos ocultos." }
+        }
+      ]
+    }
+    </script>
+
     <style>
         html {
             scroll-behavior: smooth;

@@ -6,7 +6,7 @@ import { schemaTypes } from './sanity/schemaTypes';
 export default defineConfig({
   name: 'nombre-legal-blog',
   title: 'Nombre Legal — Blog',
-  projectId: process.env.PUBLIC_SANITY_PROJECT_ID!,
+  projectId: process.env.PUBLIC_SANITY_PROJECT_ID || 'placeholder',
   dataset: process.env.PUBLIC_SANITY_DATASET || 'production',
   plugins: [
     structureTool({
