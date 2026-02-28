@@ -1,0 +1,223 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CTA from '../../components/CTA.astro';
+import { client, postBySlugQuery, latestPostsQuery, urlFor } from '../../lib/sanity';
+import { formatDate } from '../../lib/utils';
+import { renderBody } from '../../lib/portableText';
+
+export async function getStaticPaths() {
+  if (!import.meta.env.PUBLIC_SANITY_PROJECT_ID) return [];
+  try {
+    const posts = await client.fetch(
+      `*[_type == "post" && defined(slug.current)]{ "slug": slug.current }`
+    );
+    return posts.map((p: { slug: string }) => ({ params: { slug: p.slug } }));
+  } catch {
+    return [];
+  }
+}
+
+const { slug } = Astro.params;
+const post = await client.fetch(postBySlugQuery, { slug });
+
+if (!post) {
+  return Astro.redirect('/404');
+}
+
+const related = await client.fetch(latestPostsQuery);
+const relatedPosts = related.filter((p: any) => p.slug.current !== slug).slice(0, 3);
+
+const ogImage = post.mainImage
+  ? urlFor(post.mainImage).width(1200).height(630).fit('crop').url()
+  : 'https://nombrelegal.cl/og-default.jpg';
+
+const bodyHtml = renderBody(post.body);
+
+// JSON-LD schemas
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.title,
+  description: post.metaDescription || post.excerpt,
+  image: ogImage,
+  datePublished: post.publishedAt,
+  dateModified: post.updatedAt || post.publishedAt,
+  author: post.author
+    ? { '@type': 'Person', name: post.author.name, jobTitle: post.author.role }
+    : { '@type': 'Organization', name: 'Nombre Legal', url: 'https://nombrelegal.cl' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Nombre Legal',
+    url: 'https://nombrelegal.cl',
+    logo: { '@type': 'ImageObject', url: 'https://nombrelegal.cl/logo.png' },
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': Astro.url.href },
+};
+
+const faqSchema =
+  post.faqItems?.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: post.faqItems.map((item: any) => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: { '@type': 'Answer', text: item.answer },
+        })),
+      }
+    : null;
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.metaDescription || post.excerpt}
+  canonical={Astro.url.href}
+  ogImage={ogImage}
+  ogType="article"
+  publishedAt={post.publishedAt}
+  updatedAt={post.updatedAt}
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(articleSchema)} />
+  {faqSchema && (
+    <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />
+  )}
+
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-sm text-[#8A8A8A] mb-8" aria-label="Breadcrumb">
+      <a href="/" class="hover:text-[#1A1A1A] transition-colors">Blog</a>
+      <span aria-hidden="true">/</span>
+      {post.categories?.[0] && (
+        <>
+          <span>{post.categories[0].title}</span>
+          <span aria-hidden="true">/</span>
+        </>
+      )}
+      <span class="text-[#1A1A1A] truncate max-w-xs">{post.title}</span>
+    </nav>
+
+    <div class="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-12">
+
+      <!-- Artículo principal -->
+      <article>
+        <!-- Categorías -->
+        <div class="flex flex-wrap gap-2 mb-4">
+          {post.categories?.map((cat: any) => (
+            <span class="text-xs font-medium px-2.5 py-0.5 rounded-full bg-[#F5F0E8] text-[#B8872B]">
+              {cat.title}
+            </span>
+          ))}
+        </div>
+
+        <!-- Título -->
+        <h1 class="text-3xl sm:text-4xl font-bold text-[#1A1A1A] leading-tight mb-4">
+          {post.title}
+        </h1>
+
+        <!-- Excerpt -->
+        <p class="text-lg text-[#4A4A4A] mb-6 leading-relaxed">{post.excerpt}</p>
+
+        <!-- Meta -->
+        <div class="flex flex-wrap items-center gap-3 text-sm text-[#8A8A8A] mb-6 pb-6 border-b border-[#E5E0D8]">
+          {post.author && (
+            <span class="font-medium text-[#4A4A4A]">{post.author.name}</span>
+          )}
+          {post.author?.role && <span>· {post.author.role}</span>}
+          <span>·</span>
+          <time datetime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
+          {post.updatedAt && post.updatedAt !== post.publishedAt && (
+            <span class="text-xs">(actualizado {formatDate(post.updatedAt)})</span>
+          )}
+          {post.estimatedReadingTime && (
+            <>
+              <span>·</span>
+              <span>{post.estimatedReadingTime} min de lectura</span>
+            </>
+          )}
+        </div>
+
+        <!-- Imagen principal -->
+        {post.mainImage && (
+          <div class="mb-8 rounded-xl overflow-hidden">
+            <img
+              src={urlFor(post.mainImage).width(800).height(400).fit('crop').url()}
+              alt={post.mainImage.alt ?? post.title}
+              class="w-full"
+            />
+          </div>
+        )}
+
+        <!-- Contenido -->
+        <div set:html={bodyHtml} />
+
+        <!-- CTA inline -->
+        <div class="my-10">
+          <CTA variant="inline" />
+        </div>
+
+        <!-- FAQ Section -->
+        {post.faqItems?.length > 0 && (
+          <section class="mt-12" aria-labelledby="faq-heading">
+            <h2 id="faq-heading" class="text-2xl font-semibold text-[#1A1A1A] mb-6">
+              Preguntas frecuentes
+            </h2>
+            <dl class="space-y-6">
+              {post.faqItems.map((item: any) => (
+                <div class="border border-[#E5E0D8] rounded-xl p-5">
+                  <dt class="font-semibold text-[#1A1A1A] mb-2">{item.question}</dt>
+                  <dd class="text-[#4A4A4A] text-sm leading-relaxed">{item.answer}</dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+        )}
+
+        <!-- CTA final -->
+        <div class="mt-14">
+          <CTA variant="bottom" />
+        </div>
+      </article>
+
+      <!-- Sidebar -->
+      <aside class="hidden lg:block">
+        <div class="sticky top-20 space-y-8">
+
+          {relatedPosts.length > 0 && (
+            <div>
+              <h3 class="text-sm font-semibold text-[#1A1A1A] uppercase tracking-wider mb-4">
+                También te puede interesar
+              </h3>
+              <div class="space-y-4">
+                {relatedPosts.map((p: any) => (
+                  <a href={`/blog/${p.slug.current}`} class="block group">
+                    <p class="text-sm font-medium text-[#1A1A1A] group-hover:text-[#B8872B] transition-colors leading-snug mb-1">
+                      {p.title}
+                    </p>
+                    <p class="text-xs text-[#8A8A8A]">{formatDate(p.publishedAt)}</p>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div class="bg-[#F5F0E8] border border-[#E5E0D8] rounded-xl p-5">
+            <p class="text-sm font-semibold text-[#1A1A1A] mb-2">
+              ¿Necesitas ayuda con tu cambio de nombre?
+            </p>
+            <p class="text-xs text-[#4A4A4A] mb-4">Consulta gratuita, sin compromiso.</p>
+            <a
+              href="https://wa.me/56981797430?text=Hola,%20leí%20el%20blog%20de%20Nombre%20Legal%20y%20tengo%20una%20consulta"
+              target="_blank"
+              rel="noopener"
+              class="block text-center text-sm font-medium bg-[#1A1A1A] text-white rounded-full px-4 py-2 hover:bg-[#4A4A4A] transition-colors"
+            >
+              Consultar por WhatsApp
+            </a>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,75 @@
+---
+import { formatDate } from '../lib/utils';
+import { urlFor } from '../lib/sanity';
+
+interface Props {
+  post: {
+    _id: string;
+    title: string;
+    slug: { current: string };
+    publishedAt: string;
+    excerpt: string;
+    estimatedReadingTime?: number;
+    mainImage?: any;
+    categories?: Array<{ title: string; slug: { current: string } }>;
+    author?: { name: string; role?: string };
+  };
+  featured?: boolean;
+}
+
+const { post, featured = false } = Astro.props;
+const imageUrl = post.mainImage
+  ? urlFor(post.mainImage).width(featured ? 800 : 400).height(featured ? 420 : 210).fit('crop').url()
+  : null;
+---
+
+<article class={`group ${featured ? 'col-span-full' : ''}`}>
+  <a href={`/blog/${post.slug.current}`} class="block">
+    {imageUrl && (
+      <div class={`overflow-hidden rounded-xl mb-4 bg-[#F5F0E8] ${featured ? 'aspect-[2/1]' : 'aspect-[16/9]'}`}>
+        <img
+          src={imageUrl}
+          alt={post.mainImage?.alt ?? post.title}
+          class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
+          loading="lazy"
+        />
+      </div>
+    )}
+    {!imageUrl && (
+      <div class={`overflow-hidden rounded-xl mb-4 bg-[#F5F0E8] flex items-center justify-center ${featured ? 'aspect-[2/1]' : 'aspect-[16/9]'}`}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 80 80" opacity="0.3">
+          <circle cx="40" cy="8" r="5" fill="#1A1A1A"/>
+          <rect x="4" y="12" width="72" height="5" rx="2" fill="#1A1A1A"/>
+          <rect x="37" y="17" width="6" height="35" fill="#1A1A1A"/>
+          <rect x="26" y="52" width="28" height="5" rx="2" fill="#1A1A1A"/>
+        </svg>
+      </div>
+    )}
+
+    <div class="flex flex-wrap gap-2 mb-2">
+      {post.categories?.map((cat) => (
+        <span class="text-xs font-medium px-2.5 py-0.5 rounded-full bg-[#F5F0E8] text-[#B8872B]">
+          {cat.title}
+        </span>
+      ))}
+    </div>
+
+    <h2 class={`font-semibold text-[#1A1A1A] group-hover:text-[#B8872B] transition-colors leading-snug mb-2 ${featured ? 'text-2xl sm:text-3xl' : 'text-lg'}`}>
+      {post.title}
+    </h2>
+
+    <p class="text-sm text-[#4A4A4A] line-clamp-2 mb-3">{post.excerpt}</p>
+
+    <div class="flex items-center gap-3 text-xs text-[#8A8A8A]">
+      {post.author && <span>{post.author.name}</span>}
+      {post.author && <span>·</span>}
+      <time datetime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
+      {post.estimatedReadingTime && (
+        <>
+          <span>·</span>
+          <span>{post.estimatedReadingTime} min de lectura</span>
+        </>
+      )}
+    </div>
+  </a>
+</article>

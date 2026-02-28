@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import CTA from '../components/CTA.astro';
+import { client, postsQuery } from '../lib/sanity';
+
+let posts: any[] = [];
+try {
+  if (import.meta.env.PUBLIC_SANITY_PROJECT_ID) {
+    posts = await client.fetch(postsQuery);
+  }
+} catch { /* no-op during build without credentials */ }
+const [featured, ...rest] = posts;
+---
+
+<BaseLayout
+  title="Blog — Cambio de Nombre en Chile"
+  description="Guías, costos y todo lo que necesitas saber para cambiar de nombre o apellido en Chile. Información legal clara y actualizada."
+  ogType="website"
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- Hero del blog -->
+    <div class="text-center mb-12">
+      <h1 class="text-3xl sm:text-4xl font-bold text-[#1A1A1A] mb-4">
+        Blog sobre cambio de nombre en Chile
+      </h1>
+      <p class="text-lg text-[#4A4A4A] max-w-2xl mx-auto">
+        Guías prácticas, costos actualizados y respuestas a las preguntas más frecuentes
+        sobre el proceso legal de cambio de nombre y apellidos.
+      </p>
+    </div>
+
+    {posts.length === 0 ? (
+      <!-- Estado vacío -->
+      <div class="text-center py-20 text-[#8A8A8A]">
+        <p class="text-lg mb-2">Próximamente</p>
+        <p class="text-sm">Estamos preparando contenido de calidad. Vuelve pronto.</p>
+      </div>
+    ) : (
+      <div>
+        <!-- Artículo destacado -->
+        {featured && (
+          <div class="mb-12">
+            <PostCard post={featured} featured />
+          </div>
+        )}
+
+        <!-- CTA inline -->
+        {posts.length > 1 && (
+          <div class="mb-10">
+            <CTA variant="inline" />
+          </div>
+        )}
+
+        <!-- Grid de artículos -->
+        {rest.length > 0 && (
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            {rest.map((post: any) => (
+              <PostCard post={post} />
+            ))}
+          </div>
+        )}
+      </div>
+    )}
+
+    <!-- CTA final -->
+    <div class="mt-16">
+      <CTA variant="bottom" text="¿Tienes dudas sobre tu cambio de nombre?" />
+    </div>
+  </div>
+</BaseLayout>

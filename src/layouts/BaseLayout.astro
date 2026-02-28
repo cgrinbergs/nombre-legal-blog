@@ -1,0 +1,120 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+  ogType?: string;
+  publishedAt?: string;
+  updatedAt?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description = 'Blog especializado en cambio de nombre y apellidos en Chile. Guías, costos y proceso legal explicado.',
+  canonical = Astro.url.href,
+  ogImage = 'https://nombrelegal.cl/og-default.jpg',
+  ogType = 'website',
+  publishedAt,
+  updatedAt,
+  noindex = false,
+} = Astro.props;
+
+const siteName = 'Nombre Legal';
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO básico -->
+    <title>{title} | {siteName}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:locale" content="es_CL" />
+    {publishedAt && <meta property="article:published_time" content={publishedAt} />}
+    {updatedAt && <meta property="article:modified_time" content={updatedAt} />}
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- PostHog Analytics -->
+    <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_MNqyAHXrvsMk23JWlNycH3jgYexvlhpCLz89qOvHSG4', {
+        api_host: 'https://us.i.posthog.com',
+        person_profiles: 'identified_only',
+        capture_pageview: true,
+        capture_pageleave: true,
+        autocapture: true,
+      });
+    </script>
+
+    <slot name="head" />
+  </head>
+  <body class="bg-[#FFFBF5] font-sans text-[#1A1A1A] antialiased" style="font-family: 'Inter', system-ui, sans-serif;">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 bg-[#FFFBF5]/80 backdrop-blur-md z-50 border-b border-[#E5E0D8]">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-14">
+          <a href="https://nombrelegal.cl" class="flex items-center gap-2 font-bold text-[#1A1A1A]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 80 80">
+              <circle cx="40" cy="8" r="5" fill="#1A1A1A"/>
+              <rect x="4" y="12" width="72" height="5" rx="2" fill="#1A1A1A"/>
+              <rect x="37" y="17" width="6" height="35" fill="#1A1A1A"/>
+              <rect x="26" y="52" width="28" height="5" rx="2" fill="#1A1A1A"/>
+              <line x1="10" y1="17" x2="10" y2="36" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+              <line x1="70" y1="17" x2="70" y2="36" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+              <ellipse cx="10" cy="40" rx="13" ry="4" fill="#D4A84B"/>
+              <path d="M-3 40 Q10 52 23 40" fill="#B8872B"/>
+              <ellipse cx="70" cy="40" rx="13" ry="4" fill="#D4A84B"/>
+              <path d="M57 40 Q70 52 83 40" fill="#B8872B"/>
+            </svg>
+            <span>Nombre <span class="text-[#B8872B]">Legal</span></span>
+          </a>
+          <a href="https://nombrelegal.cl/#contacto"
+             class="text-sm font-medium px-4 py-2 bg-[#1A1A1A] text-white rounded-full hover:bg-[#4A4A4A] transition-colors">
+            Consulta Gratis
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="pt-14">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-24 py-12 border-t border-[#E5E0D8]">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-[#8A8A8A]">
+        <p>
+          <a href="https://nombrelegal.cl" class="hover:text-[#1A1A1A] transition-colors font-medium">Nombre Legal</a>
+          — Especialistas en cambio de nombre en Chile
+        </p>
+        <p class="mt-2">
+          El contenido de este blog es informativo y no constituye asesoría legal profesional.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
